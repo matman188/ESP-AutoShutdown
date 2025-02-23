@@ -1,18 +1,16 @@
--------------------------------------------------------------------------
-OVERVIEW:
--------------------------------------------------------------------------
+# OVERVIEW:
 
 The purpose of this application is to check if for any upcoming load shedding within your area, and automatically shut down your PC should it detect load shedding.
 
 By running this application as a Scheduled Job, you could automatically shut down your machine before load shedding commences.
 
 
-# REQUIREMENTS/COMPATIBILITY:
+## REQUIREMENTS/COMPATIBILITY:
 
 This application is compatible with <b>Windows 10</b> and higher.
 
-# API SETUP:
-## SIGNUP:
+## API SETUP:
+### SIGNUP:
 
 To use the EskomSePush API, you need to sign up to the API in order to obtain your API Token, and your Area ID.
 
@@ -21,7 +19,7 @@ https://eskomsepush.gumroad.com/l/api
 
 Once you sign up, you will receive an API Token, save this as you will need it.
 
-## OBTAIN AREA ID AND UPDATE CONFIG FILE:
+### OBTAIN AREA ID:
 
 Using the below guide and an application such as POSTMAN, you can obtain your Area ID.
 
@@ -31,6 +29,8 @@ API Guide:
 https://documenter.getpostman.com/view/1296288/UzQuNk3E
 
 You will need to use the "GET Areas Search (Text)" command to obtain your area ID.
+
+###  UPDATE CONFIG FILE:
 
 Once you have your Area ID and Token, you must configure the "esp_auto_shutdown.config" file.
 
