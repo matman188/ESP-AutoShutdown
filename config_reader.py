@@ -37,7 +37,7 @@ class ConfigReader:
 def load_config():
     """Loads configuration at startup."""
     script_dir = os.path.dirname(os.path.abspath(__file__))  
-    config_path = os.path.join(script_dir, "esp.config")
+    config_path = os.path.join(script_dir, "esp_auto_shutdown.config")
     ConfigReader(config_path)
 
     return CONFIG  # Return loaded config
