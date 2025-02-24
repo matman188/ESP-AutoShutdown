@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import os
+import threading
 
 from config_reader import load_config
 from logger import Logger
@@ -103,6 +104,11 @@ def main():
         
         if data.status_code != 200:
             LOGGER.error(f"API request failed with status code: {data.status_code}. Response: {data.text}")
+            print(f"API request failed with status code: {data.status_code}. See Logs for response details...")
+            print("Press any key to exit...")
+            threading.Timer(30, exit, args=[1]).start()
+            input()
+            exit(1)
             exit(1)
          
         response = data.json()
@@ -190,11 +196,25 @@ def main():
     except requests.exceptions.RequestException as e:
         if LOGGER:
             LOGGER.error(f"Error with the API request: {e}")
+            print(f"Error with the API request: {e}")
+            print("Press any key to exit...")
+            threading.Timer(30, exit, args=[1]).start()
+            input()
+            exit(1)
     except Exception as e:
         if LOGGER:
             LOGGER.error(f"An unexpected error occurred: {e}")
+            print(f"An unexpected error occurred: {e}")
+            print("Press any key to exit...")
+            threading.Timer(30, exit, args=[1]).start()
+            input()
+            exit(1)
         else:
             print(f"An unexpected error occurred: {e}")
+            print("Press any key to exit...")
+            threading.Timer(30, exit, args=[1]).start()
+            input()
+            exit(1)
 
 if __name__ == "__main__":
     main()  # Run the main function

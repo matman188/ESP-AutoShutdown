@@ -1,5 +1,5 @@
 import os
-import logging
+import sys
 
 CONFIG = {}  # Stores config values globally
 
@@ -29,15 +29,31 @@ class ConfigReader:
                         CONFIG[key.strip()] = value.strip()
 
         except FileNotFoundError:
-            logging.error("Config file not found! Please ensure the file exists.")
+            print("Config file not found! Please ensure the file exists.")
+            print("Press any key to exit...")
+            input()
+            exit(1)
         except Exception as e:
-            logging.error(f"Failed to load config file: {e}")
+            print(f"Failed to load config file: {e}")
+            print("Press any key to exit...")
+            input()
             exit(1)
 
 def load_config():
-    """Loads configuration at startup."""
-    script_dir = os.path.dirname(os.path.abspath(__file__))  
-    config_path = os.path.join(script_dir, "esp_auto_shutdown.config")
-    ConfigReader(config_path)
+    """Loads configuration at startup, ensuring it finds the correct config file location."""
+    
+    if getattr(sys, 'frozen', False):
+        # Running as a compiled .exe
+        script_dir = os.path.dirname(sys.executable)
+    else:
+        # Running as a script
+        script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    config_path = os.path.join(script_dir, "esp_auto_shutdown.config")
+    
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Configuration file not found: {config_path}")
+
+    ConfigReader(config_path)  # Assuming ConfigReader loads the config
+    
     return CONFIG  # Return loaded config
