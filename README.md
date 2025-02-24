@@ -10,7 +10,7 @@ By running this application as a Scheduled Job, you could automatically shut dow
 This application is compatible with <b>Windows 10</b> and higher.
 
 ## API SETUP:
-### SIGNUP:
+### ESP SIGNUP:
 
 To use the EskomSePush API, you need to sign up to the API in order to obtain your API Token, and your Area ID.
 
@@ -32,7 +32,7 @@ You will need to use the "GET Areas Search (Text)" command to obtain your area I
 
 ###  UPDATE CONFIG FILE:
 
-Once you have your Area ID and Token, you must configure the "esp_auto_shutdown.config" file.
+Once you have your Area ID and Token, you must configure the "config.config" file.
 
 Below is an example of how it may look:
 
