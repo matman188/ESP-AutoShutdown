@@ -103,7 +103,6 @@ def main():
         
         if data.status_code != 200:
             LOGGER.error(f"API request failed with status code: {data.status_code}. Response: {data.text}")
-            print(f"API request failed with status code: {data.status_code}. See Logs for response details...")
             auto_exit()
          
         response = data.json()
@@ -191,14 +190,11 @@ def main():
     except requests.exceptions.RequestException as e:
         if LOGGER:
             LOGGER.error(f"Error with the API request: {e}")
-            print(f"Error with the API request: {e}")
             auto_exit()
     except Exception as e:
         if LOGGER:
             LOGGER.error(f"An unexpected error occurred: {e}")
-            print(f"An unexpected error occurred: {e}")
             auto_exit()
-
         else:
             print(f"An unexpected error occurred: {e}")
             auto_exit()

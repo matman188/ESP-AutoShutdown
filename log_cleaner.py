@@ -12,7 +12,6 @@ class LogCleaner:
         """Cleans up logs older than the specified number of days."""
         try:
             self.logger.debug("Cleaning up old logs...")
-
             days_to_keep = int(self.config.get("keep_days", "30"))
             self.logger.debug(f"Logs will be retained for {days_to_keep} days.")
 
@@ -37,6 +36,6 @@ class LogCleaner:
                 if file_mod_time < retention_time:
                     os.remove(log_file_path)
                     self.logger.debug(f"Deleted old log file: {log_file_path}")
-
+                    print(f"Deleted old log file: {log_file_path}")
         except Exception as e:
             self.logger.error(f"Error while cleaning old logs: {e}")

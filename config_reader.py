@@ -26,7 +26,8 @@ class ConfigReader:
                     if '=' in line:
                         key, value = line.split('=', 1)
                         CONFIG[key.strip()] = value.strip()
-
+            print("Config file loaded successfully.")
+            
         except FileNotFoundError:
             print("Config file not found! Please ensure the file exists.")
             auto_exit()
