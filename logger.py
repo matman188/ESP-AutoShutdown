@@ -1,7 +1,8 @@
 import os
 import logging
 from datetime import datetime
-import threading
+
+from utils import auto_exit
 
 class Logger:
     """Handles logger initialization and configuration."""
@@ -41,10 +42,7 @@ class Logger:
 
         except Exception as e:
             print(f"Error setting up logger: {e}")
-            print("Press any key to exit...")
-            threading.Timer(30, exit, args=[1]).start()
-            input()
-            exit(1)
+            auto_exit()
 
     def get_logger(self):
         """Returns the configured logger instance."""

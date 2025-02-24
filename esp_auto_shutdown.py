@@ -1,13 +1,12 @@
 import requests
 from datetime import datetime, timedelta
 import os
-import threading
 
-from config_reader import load_config
+from utils import load_config, auto_exit
 from logger import Logger
 from log_cleaner import LogCleaner
 
-# Load configuration
+# Load configurations
 CONFIG = load_config()
 
 # Setup logger
@@ -105,11 +104,7 @@ def main():
         if data.status_code != 200:
             LOGGER.error(f"API request failed with status code: {data.status_code}. Response: {data.text}")
             print(f"API request failed with status code: {data.status_code}. See Logs for response details...")
-            print("Press any key to exit...")
-            threading.Timer(30, exit, args=[1]).start()
-            input()
-            exit(1)
-            exit(1)
+            auto_exit()
          
         response = data.json()
         LOGGER.debug(f"API Status Code: {data.status_code}. Response: {response}")
@@ -197,24 +192,16 @@ def main():
         if LOGGER:
             LOGGER.error(f"Error with the API request: {e}")
             print(f"Error with the API request: {e}")
-            print("Press any key to exit...")
-            threading.Timer(30, exit, args=[1]).start()
-            input()
-            exit(1)
+            auto_exit()
     except Exception as e:
         if LOGGER:
             LOGGER.error(f"An unexpected error occurred: {e}")
             print(f"An unexpected error occurred: {e}")
-            print("Press any key to exit...")
-            threading.Timer(30, exit, args=[1]).start()
-            input()
-            exit(1)
+            auto_exit()
+
         else:
             print(f"An unexpected error occurred: {e}")
-            print("Press any key to exit...")
-            threading.Timer(30, exit, args=[1]).start()
-            input()
-            exit(1)
+            auto_exit()
 
 if __name__ == "__main__":
     main()  # Run the main function
