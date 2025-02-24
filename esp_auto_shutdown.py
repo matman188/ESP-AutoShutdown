@@ -45,10 +45,18 @@ def check_next_event(events_data, minutes_ahead):
 
         LOGGER.debug(f"Event found matching current time: Stage {stage}, Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}, End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
         
-        # Check if the current time falls within the start and end time of the event
-        if start_time <= current_time <= end_time:
-            LOGGER.info(f"Upcoming Load Shedding Event found: Stage {stage}, Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}, End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
-            return True
+        # Check if the current time falls within the start and end time of the event       
+        # **Handle cases where end_time is past midnight**
+        if start_time <= end_time:
+            # Normal case (e.g., 14:00-16:30)
+            if start_time <= current_time <= end_time:
+                LOGGER.info(f"Upcoming Load Shedding Event found: Stage {stage}, Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}, End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+                return True
+        else:
+            # Case where the range crosses midnight (e.g., 22:00-00:30)
+            if current_time >= start_time or current_time <= end_time:
+                LOGGER.info(f"Upcoming Load Shedding Event found: Stage {stage}, Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}, End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+                return True
         
     # No upcoming event found 
     LOGGER.info("No upcoming load shedding events found that match current time.") 
