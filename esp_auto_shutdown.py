@@ -162,9 +162,8 @@ def main():
             shutdown()
 
     except requests.exceptions.RequestException as e:
-        if LOGGER:
-            LOGGER.error(f"Error with the API request: {e}")
-            auto_exit()
+        LOGGER.error(f"Error with the API request: {e}")
+        auto_exit()
     except Exception as e:
         if LOGGER:
             LOGGER.error(f"An unexpected error occurred: {e}")
