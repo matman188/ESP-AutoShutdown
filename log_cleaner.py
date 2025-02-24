@@ -36,6 +36,6 @@ class LogCleaner:
                 if file_mod_time < retention_time:
                     os.remove(log_file_path)
                     self.logger.debug(f"Deleted old log file: {log_file_path}")
-                    print(f"Deleted old log file: {log_file_path}")
+                    
         except Exception as e:
             self.logger.error(f"Error while cleaning old logs: {e}")
